@@ -1,0 +1,16 @@
+# Node
+node_modules
+*/node_modules
+
+# Build
+dist
+build
+
+# Ambiente
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+
+backend/uploads
