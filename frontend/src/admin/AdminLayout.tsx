@@ -10,7 +10,9 @@ import {
   LogOut,
   Menu,
   ChevronDown,
-  User
+  User,
+  Zap,
+  Image
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import {
@@ -21,13 +23,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const menuItems = [
-  { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
-  { path: '/admin/conteudo', icon: FileText, label: 'Conteúdo' },
-  { path: '/admin/solucoes', icon: Briefcase, label: 'Soluções' },
-  { path: '/admin/segmentos', icon: Tags, label: 'Segmentos' },
-  { path: '/admin/estatisticas', icon: BarChart3, label: 'Estatísticas' },
-  { path: '/admin/banners', icon: LayoutDashboard, label: 'Carrossel' },
-  { path: '/admin/configuracoes', icon: Settings, label: 'Configurações' },
+  { path: '/admin',                icon: LayoutDashboard, label: 'Dashboard' },
+  { path: '/admin/conteudo',       icon: FileText,         label: 'Conteúdo' },
+  { path: '/admin/links-rapidos',  icon: Zap,              label: 'Links Rápidos' },
+  { path: '/admin/solucoes',       icon: Briefcase,        label: 'Soluções' },
+  { path: '/admin/segmentos',      icon: Tags,             label: 'Segmentos' },
+  { path: '/admin/estatisticas',   icon: BarChart3,        label: 'Estatísticas' },
+  { path: '/admin/banners',        icon: Image,            label: 'Carrossel' },
+  { path: '/admin/configuracoes',  icon: Settings,         label: 'Configurações' },
 ];
 
 export function AdminLayout() {
@@ -57,7 +60,7 @@ export function AdminLayout() {
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-1">
+        <nav className="p-4 space-y-1 overflow-y-auto">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (

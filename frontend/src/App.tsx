@@ -37,6 +37,8 @@ import { SegmentsManager } from '@/admin/SegmentsManager';
 import { StatsManager } from '@/admin/StatsManager';
 import { BannersManager } from '@/admin/BannersManager';
 import { Settings } from '@/admin/Settings';
+import { QuickLinksManager } from '@/admin/QuickLinksManager';
+
 
 // Página principal
 function HomePage() {
@@ -124,6 +126,8 @@ function App() {
               <Route path="estatisticas" element={<StatsManager />} />
               <Route path="banners" element={<BannersManager />} />
               <Route path="configuracoes" element={<Settings />} />
+                            <Route path="links-rapidos" element={<QuickLinksManager />} />
+
             </Route>
 
             {/* Fallback */}
