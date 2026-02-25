@@ -40,7 +40,7 @@ export function Login() {
             <span className="text-[#00a8e8] font-bold text-3xl">L</span>
           </div>
           <h1 className="text-2xl font-bold text-white">Painel Administrativo</h1>
-          <p className="text-white/70">Linx - Gestão de Conteúdo</p>
+          <p className="text-white/70">Unimaxx - Gestor de conteúdo</p>
         </div>
 
         {/* Login Form */}
@@ -105,7 +105,7 @@ export function Login() {
               Dados de acesso padrão:
             </p>
             <p className="text-sm text-gray-600">
-              admin@linx.com / admin123
+             Num sei
             </p>
           </div>
         </div>

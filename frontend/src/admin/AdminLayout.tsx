@@ -56,9 +56,9 @@ export function AdminLayout() {
           <div className="w-8 h-8 bg-[#00a8e8] rounded flex items-center justify-center">
             <span className="font-bold text-lg">L</span>
           </div>
-          <span className="font-bold text-lg">Linx Admin</span>
+          <span className="font-bold text-lg">UNIMAXX GESTOR </span>
         </div>
-
+3
         {/* Navigation */}
         <nav className="p-4 space-y-1 overflow-y-auto">
           {menuItems.map((item) => {
