@@ -24,6 +24,7 @@ import Blog from './pages/Blog';
 import Imprensa from './pages/Imprensa';
 import Suporte from './pages/Suporte';
 import Cliente from './pages/Cliente';
+import HelpCenter from './pages/HelpCenter';
 import Privacidade from './pages/Privacidade';
 import Termos from './pages/Termos';
 
@@ -38,6 +39,7 @@ import { StatsManager } from '@/admin/StatsManager';
 import { BannersManager } from '@/admin/BannersManager';
 import { Settings } from '@/admin/Settings';
 import { QuickLinksManager } from '@/admin/QuickLinksManager';
+import { HelpCenterManager } from '@/admin/HelpCenterManager';
 
 
 // Página principal
@@ -102,7 +104,8 @@ function App() {
             <Route path="/blog" element={<Blog />} />
 
             {/* Suporte e Contato */}
-            <Route path="/suporte" element={<Suporte />} />
+           <Route path="/suporte" element={<HelpCenter />} />
+           <Route path="/ajuda" element={<HelpCenter />} />
             <Route path="/cliente" element={<Cliente />} />
 
             {/* Legais */}
@@ -127,6 +130,7 @@ function App() {
               <Route path="banners" element={<BannersManager />} />
               <Route path="configuracoes" element={<Settings />} />
                             <Route path="links-rapidos" element={<QuickLinksManager />} />
+              <Route path="central-ajuda" element={<HelpCenterManager />} />
 
             </Route>
 

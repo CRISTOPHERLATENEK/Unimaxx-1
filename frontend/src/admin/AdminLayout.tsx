@@ -12,7 +12,8 @@ import {
   ChevronDown,
   User,
   Zap,
-  Image
+  Image,
+  HelpCircle
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import {
@@ -30,6 +31,7 @@ const menuItems = [
   { path: '/admin/segmentos',      icon: Tags,             label: 'Segmentos' },
   { path: '/admin/estatisticas',   icon: BarChart3,        label: 'Estatísticas' },
   { path: '/admin/banners',        icon: Image,            label: 'Carrossel' },
+  { path: '/admin/central-ajuda',  icon: HelpCircle,       label: 'Central de Ajuda' },
   { path: '/admin/configuracoes',  icon: Settings,         label: 'Configurações' },
 ];
 

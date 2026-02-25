@@ -10,3 +10,7 @@ backend/database.sqlite
 
 dist/
 build/
+
+
+
+backend/uploads/

@@ -8,6 +8,9 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
+// Importar módulo de Suporte
+const setupHelpModule = require('./help-module');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'linx-secret-key-2025';
@@ -441,6 +444,48 @@ app.delete('/api/admin/segments/:id', authenticateToken, (req, res) => {
   );
 });
 
+// Inicializar módulo de Suporte
+setupHelpModule(app, db, authenticateToken, upload);
+
+// ========================================
+// ROTAS PÚBLICAS - CENTRAL DE AJUDA
+// ========================================
+
+// Buscar categorias ativas
+app.get('/api/help/categories', (req, res) => {
+  db.all(`
+    SELECT *
+    FROM help_categories
+    WHERE active = 1
+    ORDER BY id DESC
+  `, [], (err, rows) => {
+    if (err) {
+      console.error('Erro ao buscar categorias públicas:', err);
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+    res.json(rows);
+  });
+});
+
+// Buscar artigos ativos
+app.get('/api/help/articles', (req, res) => {
+  db.all(`
+    SELECT a.*, c.name as category_name
+    FROM help_articles a
+    LEFT JOIN help_categories c ON c.id = a.category_id
+    WHERE a.status = 1
+    ORDER BY a.id DESC
+  `, [], (err, rows) => {
+    if (err) {
+      console.error('Erro ao buscar artigos públicos:', err);
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+    res.json(rows);
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
