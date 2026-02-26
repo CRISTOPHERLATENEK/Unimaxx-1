@@ -228,6 +228,11 @@ export function useHelpCenter() {
     return res.json();
   }, [token]);
 
+
+  useEffect(() => {
+  console.log("HelpCenter carregado");
+}, []);
+
   return {
     // State
     categories,

@@ -4,47 +4,51 @@
 
 @layer base {
   :root {
+  /* FUNDO E TEXTO */
   --background: 0 0% 100%;
-  --foreground: 20 14% 15%;
+  --foreground: 222 47% 11%; /* texto bem escuro */
 
   --card: 0 0% 100%;
-  --card-foreground: 20 14% 15%;
+  --card-foreground: 222 47% 11%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14% 15%;
+  --popover-foreground: 222 47% 11%;
 
   /* 🔥 LARANJA PRINCIPAL */
-  --primary: 24 100% 50%;
+  --primary: 24 95% 53%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 24 100% 95%;
-  --secondary-foreground: 24 80% 30%;
+  /* SECUNDÁRIO MAIS NEUTRO */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 20%;
 
-  --muted: 24 30% 96%;
-  --muted-foreground: 24 10% 40%;
+  /* TEXTOS SECUNDÁRIOS */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 20% 40%;
 
-  --accent: 24 100% 50%;
+  --accent: 24 95% 53%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 24 30% 88%;
-  --input: 24 30% 88%;
+  /* BORDAS MAIS VISÍVEIS */
+  --border: 214 32% 85%;
+  --input: 214 32% 85%;
 
-  --ring: 24 100% 50%;
+  --ring: 24 95% 53%;
 
-  --radius: 0.625rem;
+  --radius: 0.75rem;
 
-  /* SIDEBAR LARANJA */
-  --sidebar-background: 24 100% 50%;
-  --sidebar-foreground: 0 0% 100%;
-  --sidebar-primary: 24 100% 45%;
+  /* SIDEBAR ESCURA PARA CONTRASTE REAL */
+  --sidebar-background: 222 47% 11%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 24 95% 53%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 24 100% 55%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 24 60% 40%;
-  --sidebar-ring: 24 100% 50%;
+  --sidebar-accent: 222 47% 18%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 222 47% 18%;
+  --sidebar-ring: 24 95% 53%;
 }
  .dark {
   --background: 20 14% 10%;

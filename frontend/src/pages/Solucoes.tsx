@@ -25,7 +25,7 @@ function Solucoes() {
         'Integração com marketplaces'
       ],
       beneficios: ['Redução de 30% nos custos operacionais', 'Aumento de 25% na produtividade', 'Tomada de decisão mais rápida'],
-      cor: 'from-blue-500 to-blue-600'
+      cor: 'from-orange-500 to-orange-600'
     },
     {
       id: 'pdv',
@@ -42,25 +42,8 @@ function Solucoes() {
         'Integração com TEF'
       ],
       beneficios: ['Atendimento 40% mais rápido', 'Redução de filas', 'Aumento da satisfação do cliente'],
-      cor: 'from-green-500 to-green-600'
+      cor: 'from-amber-500 to-amber-600'
     },
-    // {
-    //   id: 'commerce',
-    //   icon: <Globe size={48} />,
-    //   title: 'Linx Commerce',
-    //   subtitle: 'E-commerce Completo',
-    //   description: 'Plataforma de e-commerce robusta e escalável para vender online com a mesma eficiência da loja física. Integração total omnichannel.',
-    //   features: [
-    //     'Loja virtual personalizável',
-    //     'Integração com marketplaces',
-    //     'Gestão omnichannel',
-    //     'App mobile nativo',
-    //     'SEO otimizado',
-    //     'Checkout transparente'
-    //   ],
-    //   beneficios: ['Aumento de 50% nas vendas online', 'Integração total online/offline', 'Experiência unificada do cliente'],
-    //   cor: 'from-purple-500 to-purple-600'
-    // },
     {
       id: 'pay',
       icon: <CreditCard size={48} />,
@@ -76,7 +59,7 @@ function Solucoes() {
         'Pix integrado'
       ],
       beneficios: ['Taxas competitivas', 'Recebimento em D+1', 'Conciliação automática'],
-      cor: 'from-orange-500 to-orange-600'
+      cor: 'from-orange-600 to-orange-700'
     },
     {
       id: 'delivery',
@@ -110,7 +93,7 @@ function Solucoes() {
         'Alertas automáticos'
       ],
       beneficios: ['Decisões baseadas em dados', 'Identificação de oportunidades', 'Previsão de tendências'],
-      cor: 'from-cyan-500 to-cyan-600'
+      cor: 'from-orange-400 to-orange-500'
     },
   ];
 
@@ -123,19 +106,19 @@ function Solucoes() {
 
   // Hero estático (fallback quando não há banner cadastrado no admin)
   const heroFallback = (
-    <section className="relative py-32 linx-purple overflow-hidden">
+    <section className="relative py-32 bg-slate-900 overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-600 rounded-full blur-3xl" />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="inline-block px-4 py-1 bg-white/10 text-orange-400 rounded-full text-sm font-medium mb-6 border border-white/10">
+        <span className="inline-block px-4 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium mb-6 border border-orange-500/30">
           Portfólio
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-          Nossas <span className="linx-gradient-text">Soluções</span>
+          Nossas <span className="text-orange-400">Soluções</span>
         </h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+        <p className="text-xl text-slate-300 max-w-3xl mx-auto">
           Mais de 180 soluções para atender todas as necessidades do varejo brasileiro.
         </p>
       </div>
@@ -143,24 +126,24 @@ function Solucoes() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-50">
       <Header />
 
       {/* Banner Dinâmico (admin) ou Hero estático (fallback) */}
       <PageBanner page="solucoes" fallback={heroFallback} />
 
       {/* Diferenciais */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {diferenciais.map((item, index) => (
-              <div key={index} className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-500 flex-shrink-0">
+              <div key={index} className="flex items-center gap-4 bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 flex-shrink-0">
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
-                  <p className="text-gray-500 text-xs">{item.desc}</p>
+                  <h3 className="font-semibold text-slate-900 text-sm">{item.title}</h3>
+                  <p className="text-slate-500 text-xs">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -169,7 +152,7 @@ function Solucoes() {
       </section>
 
       {/* Soluções Detalhadas */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-24">
             {solucoes.map((solucao, index) => (
@@ -178,24 +161,24 @@ function Solucoes() {
                   <div className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${solucao.cor} rounded-full text-white text-sm font-medium mb-6`}>
                     {solucao.icon}
                   </div>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{solucao.title}</h2>
-                  <p className="text-xl text-orange-500 mb-4">{solucao.subtitle}</p>
-                  <p className="text-gray-600 mb-6">{solucao.description}</p>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">{solucao.title}</h2>
+                  <p className="text-xl text-orange-600 mb-4">{solucao.subtitle}</p>
+                  <p className="text-slate-600 mb-6">{solucao.description}</p>
                   
                   <div className="grid sm:grid-cols-2 gap-3 mb-6">
                     {solucao.features.map((feature, i) => (
-                      <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                        <CheckCircle2 size={16} className="text-orange-500 flex-shrink-0" />
+                      <div key={i} className="flex items-center gap-2 text-sm text-slate-600">
+                        <CheckCircle2 size={16} className="text-orange-600 flex-shrink-0" />
                         {feature}
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-2 text-sm">Benefícios:</h4>
+                  <div className="bg-white rounded-xl p-4 mb-6 border border-slate-200">
+                    <h4 className="font-semibold text-slate-900 mb-2 text-sm">Benefícios:</h4>
                     <div className="flex flex-wrap gap-2">
                       {solucao.beneficios.map((beneficio, i) => (
-                        <span key={i} className="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-xs font-medium">
+                        <span key={i} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
                           {beneficio}
                         </span>
                       ))}
@@ -203,7 +186,7 @@ function Solucoes() {
                   </div>
 
                   <Link to={`/solucao/${solucao.id}`}>
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+                    <Button className="bg-orange-600 hover:bg-orange-700 text-white">
                       Conheça o {solucao.title}
                       <ArrowRight className="ml-2" size={18} />
                     </Button>
@@ -212,8 +195,8 @@ function Solucoes() {
 
                 <div className={`relative ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                   <div className={`absolute inset-0 bg-gradient-to-br ${solucao.cor} rounded-3xl blur-2xl opacity-20 transform rotate-3`} />
-                  <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-100">
-                    <div className="aspect-video bg-white rounded-2xl shadow-lg flex items-center justify-center">
+                  <div className="relative bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+                    <div className="aspect-video bg-slate-50 rounded-2xl shadow-inner flex items-center justify-center">
                       <div className={`text-transparent bg-clip-text bg-gradient-to-br ${solucao.cor}`}>
                         <div className="transform scale-150">{solucao.icon}</div>
                       </div>
@@ -227,25 +210,33 @@ function Solucoes() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 linx-purple relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255,107,53,0.3) 0%, transparent 50%)`
-          }} />
-        </div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Encontre a <span className="linx-gradient-text">solução ideal</span> para seu negócio
-          </h2>
-          <p className="text-lg text-gray-300 mb-8">
-            Nossos especialistas estão prontos para ajudar você a escolher a melhor solução.
-          </p>
-          <Link to="/cliente">
-            <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-8">
-              Falar com um Especialista
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-          </Link>
+      <section className="py-12 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-900 rounded-2xl p-8 md:p-10 relative overflow-hidden shadow-xl">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+            </div>
+            
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex-1">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  Encontre a <span className="text-orange-400">solução ideal</span> para seu negócio
+                </h2>
+                <p className="text-slate-400 text-base">
+                  Nossos especialistas estão prontos para ajudar você a escolher a melhor solução.
+                </p>
+              </div>
+              
+              <div className="flex flex-col items-start md:items-end gap-2">
+                <Link to="/cliente">
+                  <Button size="default" className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-base font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 transition-all">
+                    Falar com um Especialista
+                  </Button>
+                </Link>
+                <span className="text-slate-500 text-xs">*Atendimento personalizado</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
