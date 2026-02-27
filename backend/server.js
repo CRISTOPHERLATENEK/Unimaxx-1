@@ -476,6 +476,37 @@ app.get('/api/solution-pages/:slug', (req, res) => {
   });
 });
 
+// ✅ ADICIONAR: Listar todas as solution-pages ativas (público)
+app.get('/api/solution-pages', (req, res) => {
+  db.all(
+    `SELECT id, slug, title, subtitle, description, features, benefits,
+            integrations, hero_image, icon, color_theme, meta_title,
+            meta_description, is_active, created_at, updated_at
+     FROM solution_pages
+     WHERE is_active = 1
+     ORDER BY id ASC`,
+    [],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: 'Erro ao buscar páginas de soluções' });
+
+      const parseArr = (v) => {
+        if (!v) return [];
+        try { return typeof v === 'string' ? JSON.parse(v) : v; }
+        catch { return []; }
+      };
+
+      const parsed = (rows || []).map((row) => ({
+        ...row,
+        features:     parseArr(row.features),
+        benefits:     parseArr(row.benefits),
+        integrations: parseArr(row.integrations),
+        is_active:    !!row.is_active,
+      }));
+
+      res.json(parsed);
+    }
+  );
+});
 // =============================
 // ROTAS ADMIN (PROTEGIDAS)
 // =============================
