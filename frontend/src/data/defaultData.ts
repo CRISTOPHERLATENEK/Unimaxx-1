@@ -102,5 +102,9 @@ export const defaultData: SiteData = {
   segments: [],
 
   // 🔥 AGORA VAZIO — NÃO EXISTE MAIS MOCK
-  stats: []
+  stats: [],
+
+  banners: [],
+
+  settings: {}
 };

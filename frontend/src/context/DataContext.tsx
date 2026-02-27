@@ -45,6 +45,28 @@ export function DataProvider({ children }: { children: ReactNode }) {
     setLoading(true);
     setError(null);
 
+    const token = localStorage.getItem('token');
+
+    // ==============================
+    // SE ESTIVER LOGADO → ADMIN
+    // ==============================
+    if (token) {
+      const res = await fetch(`${API_URL}/admin/all-data`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!res.ok) throw new Error('Erro ao carregar dados admin');
+
+      const adminData = await res.json();
+      setData(adminData);
+      return;
+    }
+
+    // ==============================
+    // SE NÃO ESTIVER LOGADO → PÚBLICO
+    // ==============================
     const responses = await Promise.allSettled([
       fetch(`${API_URL}/content`),
       fetch(`${API_URL}/solutions`),
@@ -79,6 +101,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   } catch (err) {
     console.error('Erro ao carregar dados:', err);
+    setError('Erro ao carregar dados');
   } finally {
     setLoading(false);
   }

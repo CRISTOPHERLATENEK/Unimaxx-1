@@ -88,6 +88,7 @@ export function SegmentsManager() {
 
   const openNewSegment = () => {
     const newSegment: Segment = {
+      id: '',
       segment_id: `segment-${Date.now()}`,
       name: '',
       icon: 'Shirt',

@@ -7,6 +7,68 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 
+// Chaves padrão garantidas por seção (exibidas mesmo sem dados no banco)
+const DEFAULT_SECTION_KEYS: Record<string, string[]> = {
+  header: [
+    'header.logo',
+    'header.company',
+    'header.nav.solutions',
+    'header.nav.institutional',
+    'header.nav.support',
+    'header.nav.contact',
+  ],
+  hero: [
+    'hero.title',
+    'hero.subtitle',
+    'hero.cta_primary',
+    'hero.cta_secondary',
+    'hero.image',
+  ],
+  quicklinks: [
+    'quicklinks.title',
+    'quicklinks.subtitle',
+  ],
+  solutions: [
+    'solutions.title',
+    'solutions.subtitle',
+  ],
+  stats: [
+    'stats.title',
+    'stats.subtitle',
+    'stats.description',
+  ],
+  segments: [
+    'segments.title',
+    'segments.subtitle',
+  ],
+  differentials: [
+    'differentials.title',
+    'differentials.subtitle',
+    'differentials.item1_title',
+    'differentials.item1_desc',
+    'differentials.item2_title',
+    'differentials.item2_desc',
+    'differentials.item3_title',
+    'differentials.item3_desc',
+  ],
+  contact: [
+    'contact.title',
+    'contact.subtitle',
+    'contact.phone',
+    'contact.email',
+    'contact.address',
+  ],
+  footer: [
+    'footer.logo',
+    'footer.company',
+    'footer.description',
+    'footer.copyright',
+  ],
+};
+
+// Chaves que devem usar o campo de upload de imagem
+const IMAGE_KEYS = ['header.logo', 'hero.image', 'footer.logo'];
+
 export function ContentManager() {
   const { data, updateContent, uploadImage } = useData();
   const [editedContent, setEditedContent] = useState<Record<string, string>>({});
@@ -15,45 +77,24 @@ export function ContentManager() {
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
+  // Mescla as chaves padrão com as do banco (sem duplicatas)
+  const mergedKeys = (section: string): string[] => {
+    const defaults = DEFAULT_SECTION_KEYS[section] || [];
+    const fromDB = Object.keys(data.content).filter(k => k.startsWith(`${section}.`));
+    const all = Array.from(new Set([...defaults, ...fromDB]));
+    return all.sort();
+  };
+
   const contentSections = {
-    header: {
-      title: 'Cabeçalho',
-      keys: Object.keys(data.content).filter(k => k.startsWith('header.'))
-    },
-    hero: {
-      title: 'Hero',
-      keys: Object.keys(data.content).filter(k => k.startsWith('hero.'))
-    },
-    quicklinks: {
-      title: 'Links Rápidos',
-      keys: Object.keys(data.content).filter(k => k.startsWith('quicklinks.'))
-    },
-    solutions: {
-      title: 'Soluções',
-      keys: Object.keys(data.content).filter(k => k.startsWith('solutions.'))
-    },
-    // --- AJUSTE: Adicionada a seção de Estatísticas ---
-    stats: {
-      title: 'Estatísticas',
-      keys: Object.keys(data.content).filter(k => k.startsWith('stats.'))
-    },
-    // --------------------------------------------------
-    segments: {
-      title: 'Segmentos',
-      keys: Object.keys(data.content).filter(k => k.startsWith('segments.'))
-    },
-    differentials: {
-      title: 'Diferenciais',
-      keys: Object.keys(data.content).filter(k => k.startsWith('differentials.'))
-    },
-    contact: {
-      title: 'Contato',
-      keys: Object.keys(data.content).filter(k => k.startsWith('contact.'))
-    },
-    footer: {
-      title: 'Rodapé',
-      keys: Object.keys(data.content).filter(k => k.startsWith('footer.'))
-    },
+    header:       { title: 'Cabeçalho',    keys: mergedKeys('header') },
+    hero:         { title: 'Hero (Banner)', keys: mergedKeys('hero') },
+    quicklinks:   { title: 'Links Rápidos', keys: mergedKeys('quicklinks') },
+    solutions:    { title: 'Soluções',      keys: mergedKeys('solutions') },
+    stats:        { title: 'Estatísticas',  keys: mergedKeys('stats') },
+    segments:     { title: 'Segmentos',     keys: mergedKeys('segments') },
+    differentials:{ title: 'Diferenciais',  keys: mergedKeys('differentials') },
+    contact:      { title: 'Contato',       keys: mergedKeys('contact') },
+    footer:       { title: 'Rodapé',        keys: mergedKeys('footer') },
   };
 
   const handleChange = (key: string, value: string) => {
@@ -117,6 +158,51 @@ export function ContentManager() {
     return keys.filter(k => k.toLowerCase().includes(searchTerm.toLowerCase()));
   };
 
+  const getFieldLabel = (key: string): string => {
+    const labels: Record<string, string> = {
+      'header.logo':               '🖼️ Logo do Cabeçalho (texto ou URL/upload de imagem)',
+      'header.company':            'Nome da Empresa',
+      'header.nav.solutions':      'Menu: Soluções',
+      'header.nav.institutional':  'Menu: Institucional',
+      'header.nav.support':        'Menu: Suporte',
+      'header.nav.contact':        'Menu: Fale Conosco',
+      'hero.title':                'Título Principal',
+      'hero.subtitle':             'Subtítulo',
+      'hero.cta_primary':          'Botão Primário (CTA)',
+      'hero.cta_secondary':        'Botão Secundário',
+      'hero.image':                '🖼️ Imagem do Banner (substitui estatísticas)',
+      'quicklinks.title':          'Título',
+      'quicklinks.subtitle':       'Subtítulo',
+      'solutions.title':           'Título',
+      'solutions.subtitle':        'Subtítulo',
+      'stats.title':               'Título',
+      'stats.subtitle':            'Subtítulo',
+      'stats.description':         'Descrição',
+      'segments.title':            'Título',
+      'segments.subtitle':         'Subtítulo',
+      'differentials.title':       'Título',
+      'differentials.subtitle':    'Subtítulo',
+      'differentials.item1_title': 'Item 1 — Título',
+      'differentials.item1_desc':  'Item 1 — Descrição',
+      'differentials.item2_title': 'Item 2 — Título',
+      'differentials.item2_desc':  'Item 2 — Descrição',
+      'differentials.item3_title': 'Item 3 — Título',
+      'differentials.item3_desc':  'Item 3 — Descrição',
+      'contact.title':             'Título',
+      'contact.subtitle':          'Subtítulo',
+      'contact.phone':             'Telefone',
+      'contact.email':             'E-mail',
+      'contact.address':           'Endereço',
+      'footer.logo':               '🖼️ Logo do Rodapé (texto ou URL/upload de imagem)',
+      'footer.company':            'Nome da Empresa',
+      'footer.description':        'Descrição',
+      'footer.copyright':          'Texto de Copyright',
+    };
+    return labels[key] || key;
+  };
+
+  const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3001/api').replace('/api', '');
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -178,9 +264,11 @@ export function ContentManager() {
                 {filterKeys(section.keys).map((contentKey) => (
                   <div key={contentKey}>
                     <Label htmlFor={contentKey} className="text-sm font-medium text-gray-700">
-                      {contentKey}
+                      {getFieldLabel(contentKey)}
                     </Label>
-                    {contentKey === 'header.logo' || contentKey === 'hero.image' ? (
+
+                    {/* Campo com upload de imagem */}
+                    {IMAGE_KEYS.includes(contentKey) ? (
                       <div className="mt-1 space-y-2">
                         <div className="flex gap-2">
                           <Input
@@ -188,7 +276,11 @@ export function ContentManager() {
                             value={getValue(contentKey)}
                             onChange={(e) => handleChange(contentKey, e.target.value)}
                             className={editedContent[contentKey] !== undefined ? 'border-[#00a8e8] bg-blue-50' : ''}
-                            placeholder={contentKey === 'header.logo' ? "Texto da logo ou URL da imagem" : "URL da imagem do banner"}
+                            placeholder={
+                              contentKey === 'header.logo' || contentKey === 'footer.logo'
+                                ? 'Texto da logo ou URL da imagem'
+                                : 'URL da imagem do banner'
+                            }
                           />
                           <div className="relative">
                             <input
@@ -204,30 +296,56 @@ export function ContentManager() {
                             <Button
                               type="button"
                               variant="outline"
+                              title="Fazer upload de imagem"
                               onClick={() => document.getElementById(`${contentKey}-upload`)?.click()}
                               disabled={uploading === contentKey}
                             >
                               <Upload className={`w-4 h-4 ${uploading === contentKey ? 'animate-bounce' : ''}`} />
+                              {uploading === contentKey ? ' Enviando...' : ' Upload'}
                             </Button>
                           </div>
                         </div>
-                        {getValue(contentKey) && (getValue(contentKey).startsWith('/uploads/') || getValue(contentKey).startsWith('http' )) && (
-                          <div className="mt-2 p-2 border rounded bg-gray-50">
-                            <p className="text-xs text-gray-500 mb-1">Prévia da imagem:</p>
-                            <img 
-                              src={getValue(contentKey).startsWith('http' ) ? getValue(contentKey) : (import.meta.env.VITE_API_URL || 'http://localhost:3001/api' ).replace('/api', '') + getValue(contentKey)} 
-                              alt="Preview" 
-                              className={contentKey === 'header.logo' ? "h-8 w-auto object-contain" : "w-full max-h-40 object-cover rounded"}
-                            />
-                          </div>
-                        )}
+
+                        {/* Prévia da imagem */}
+                        {getValue(contentKey) &&
+                          (getValue(contentKey).startsWith('/uploads/') || getValue(contentKey).startsWith('http')) && (
+                            <div className="mt-2 p-2 border rounded bg-gray-50">
+                              <p className="text-xs text-gray-500 mb-1">Prévia da imagem:</p>
+                              <img
+                                src={
+                                  getValue(contentKey).startsWith('http')
+                                    ? getValue(contentKey)
+                                    : `${API_BASE}${getValue(contentKey)}`
+                                }
+                                alt="Preview"
+                                className={
+                                  contentKey === 'header.logo' || contentKey === 'footer.logo'
+                                    ? 'h-12 w-auto object-contain'
+                                    : 'w-full max-h-40 object-cover rounded'
+                                }
+                              />
+                            </div>
+                          )}
+
+                        {/* Dicas por campo */}
                         {contentKey === 'hero.image' && (
                           <p className="text-xs text-gray-400">
                             * Se este campo estiver preenchido com uma imagem, ela substituirá os quadradinhos de estatísticas no banner principal.
                           </p>
                         )}
+                        {contentKey === 'footer.logo' && (
+                          <p className="text-xs text-gray-400">
+                            * Deixe em branco para usar o nome da empresa como logo no rodapé. Recomendado: versão branca/clara da logo (o fundo do rodapé é escuro).
+                          </p>
+                        )}
+                        {contentKey === 'header.logo' && (
+                          <p className="text-xs text-gray-400">
+                            * Deixe em branco para usar o nome da empresa como logo no cabeçalho.
+                          </p>
+                        )}
                       </div>
                     ) : (
+                      /* Campo de texto simples */
                       <Input
                         id={contentKey}
                         value={getValue(contentKey)}
@@ -237,6 +355,7 @@ export function ContentManager() {
                     )}
                   </div>
                 ))}
+
                 {filterKeys(section.keys).length === 0 && (
                   <p className="text-gray-500 text-center py-8">
                     Nenhum conteúdo encontrado
