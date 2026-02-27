@@ -1,3 +1,5 @@
+// src/App.tsx - VERSÃO ATUALIZADA COM ROTA DE PÁGINAS DE SOLUÇÕES
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { DataProvider } from '@/context/DataContext';
@@ -41,6 +43,8 @@ import { Settings } from '@/admin/Settings';
 import { QuickLinksManager } from '@/admin/QuickLinksManager';
 import { HelpCenterManager } from '@/admin/HelpCenterManager';
 
+// ✅ NOVA: Gerenciador de Páginas de Soluções
+import SolutionPagesManager from '@/admin/SolutionPagesManager';
 
 // Página principal
 function HomePage() {
@@ -104,8 +108,8 @@ function App() {
             <Route path="/blog" element={<Blog />} />
 
             {/* Suporte e Contato */}
-           <Route path="/suporte" element={<HelpCenter />} />
-           <Route path="/ajuda" element={<HelpCenter />} />
+            <Route path="/suporte" element={<HelpCenter />} />
+            <Route path="/ajuda" element={<HelpCenter />} />
             <Route path="/cliente" element={<Cliente />} />
 
             {/* Legais */}
@@ -125,13 +129,16 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="conteudo" element={<ContentManager />} />
               <Route path="solucoes" element={<SolutionsManager />} />
+
+              {/* ✅ NOVA ROTA: Páginas de Soluções */}
+              <Route path="paginas-solucoes" element={<SolutionPagesManager />} />
+
               <Route path="segmentos" element={<SegmentsManager />} />
               <Route path="estatisticas" element={<StatsManager />} />
               <Route path="banners" element={<BannersManager />} />
               <Route path="configuracoes" element={<Settings />} />
-                            <Route path="links-rapidos" element={<QuickLinksManager />} />
+              <Route path="links-rapidos" element={<QuickLinksManager />} />
               <Route path="central-ajuda" element={<HelpCenterManager />} />
-
             </Route>
 
             {/* Fallback */}
